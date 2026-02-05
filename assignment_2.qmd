@@ -93,10 +93,12 @@ Write a second version of `pos_na()` that performs the same task **without** usi
 
 ```{r}
 pos_na2 <- function(v1, v2) {
-  stopifnot("The vectors are not the same length" = length(v1) == length(v2))
-    
-  na <- which(is.na(v1) & is.na(v2))
-    return(na)
+  outputs <- list(which(is.na(v1) & is.na(v2)),
+                  "The vectors are not the same length.")
+  
+  logicvariable <- 2 - (length(v1) == length(v2))
+  
+  return(outputs[[logicvariable]])
 }
 
 one <- c(1, NA, 2)
@@ -124,12 +126,18 @@ w <- c(NA, -5, 2, 4, 4, NA, 11)
 pos_na2(r, w)
 ```
 
-
 \`\`
 
 # Question 2
 
 Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proport
+
+```{r}
+wmata <- read.csv("wmata_ridership.csv")
+
+View(wmata)
+```
+
 
 # Question 3:
 
