@@ -84,7 +84,6 @@ pos_na(r, w)
 
 ```
 
-
 ### (1ii) Without using an `if` statement
 
 Write a second version of `pos_na()` that performs the same task **without** using an `if` statement.
@@ -130,14 +129,114 @@ pos_na2(r, w)
 
 # Question 2
 
-Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proport
+Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proportion
 
 ```{r}
 wmata <- read.csv("wmata_ridership.csv")
+wmata
+str(wmata)
 
-View(wmata)
+wmata <- wmata %>%
+  mutate(prop = Total/sum(Total))
+
+wmata
+
+jan <- wmata[substr(wmata$Date, 6, 7) == "01", ]
+
+feb <- wmata[substr(wmata$Date, 6, 7) == "02", ]
+
+mar <- wmata[substr(wmata$Date, 6, 7) == "03", ]
+
+apr <- wmata[substr(wmata$Date, 6, 7) == "04", ]
+
+may <- wmata[substr(wmata$Date, 6, 7) == "05", ]
+
+jun <- wmata[substr(wmata$Date, 6, 7) == "06", ]
+
+jul <- wmata[substr(wmata$Date, 6, 7) == "07", ]
+
+aug <- wmata[substr(wmata$Date, 6, 7) == "08", ]
+
+sep <- wmata[substr(wmata$Date, 6, 7) == "09", ]
+
+oct <- wmata[substr(wmata$Date, 6, 7) == "10", ]
+
+nov <- wmata[substr(wmata$Date, 6, 7) == "11", ]
+
+dec <- wmata[substr(wmata$Date, 6, 7) == "12", ]
+
+ggplot(data = jan, mapping = aes(x = prop)) +
+  geom_boxplot(col = "orchid", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of January WMATA ridership") +
+  theme_bw()
+
+ggplot(data = feb, mapping = aes(x = prop)) +
+  geom_boxplot(col = "blue", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of February WMATA ridership") +
+  theme_bw()
+
+ggplot(data = mar, mapping = aes(x = prop)) +
+  geom_boxplot(col = "darkgreen", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of March WMATA ridership") +
+  theme_bw()
+
+ggplot(data = apr, mapping = aes(x = prop)) +
+  geom_boxplot(col = "red", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of April WMATA ridership") +
+  theme_bw()
+
+ggplot(data = may, mapping = aes(x = prop)) +
+  geom_boxplot(col = "brown", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of May WMATA ridership") +
+  theme_bw()
+
+ggplot(data = jun, mapping = aes(x = prop)) +
+  geom_boxplot(col = "black", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of June WMATA ridership") +
+  theme_bw()
+
+ggplot(data = jul, mapping = aes(x = prop)) +
+  geom_boxplot(col = "darkorange", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of July WMATA ridership") +
+  theme_bw()
+
+ggplot(data = aug, mapping = aes(x = prop)) +
+  geom_boxplot(col = "darkred", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of August WMATA ridership") +
+  theme_bw()
+
+ggplot(data = sep, mapping = aes(x = prop)) +
+  geom_boxplot(col = "deeppink", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of September WMATA ridership") +
+  theme_bw()
+
+ggplot(data = oct, mapping = aes(x = prop)) +
+  geom_boxplot(col = "darkblue", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of October WMATA ridership") +
+  theme_bw()
+
+ggplot(data = nov, mapping = aes(x = prop)) +
+  geom_boxplot(col = "purple", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of November WMATA ridership") +
+  theme_bw()
+
+ggplot(data = dec, mapping = aes(x = prop)) +
+  geom_boxplot(col = "coral", fill = "white") +
+  labs(x = "Proportion of daily rides", 
+       title = "Boxplot of December WMATA ridership") +
+  theme_bw()
 ```
-
 
 # Question 3:
 
