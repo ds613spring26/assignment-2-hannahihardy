@@ -364,6 +364,39 @@ records_cleaned <- records_cleaned %>%
 
 4.  **Construct a clean data frame** containing the parsed and converted variables.
 
+```{r}
+
+records_cleaned
+
+```
+
+
 5.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
+
+```{r}
+
+years_worked <- numeric(nrow(records_cleaned))
+
+for (i in 1:nrow(records_cleaned)) {
+  yearhired <- year(records_cleaned$hire_date[i])
+  yeartoday <- year(today())
+  
+  mmddhired <- as.numeric(format(records_cleaned$hire_date[i], "%m%d"))
+  mmddtoday <- as.numeric(format(today(), "%m%d"))
+  
+  if (mmddhired > mmddtoday) {
+    years_worked[i] <- yeartoday - yearhired - 1
+  } else {
+    years_worked[i] <- yeartoday - yearhired
+  }
+}
+
+years_worked
+
+records_cleaned <- records_cleaned %>%
+  mutate(years_worked = years_worked)
+
+```
+
 
 6.  **Return the final cleaned data frame.**
