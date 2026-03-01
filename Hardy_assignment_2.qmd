@@ -1,5 +1,6 @@
 ---
-title: "assignment_2"
+title: "Hardy Assignment 2"
+author: "Hannah Hardy"
 format: html
 editor: visual
 ---
@@ -129,14 +130,11 @@ pos_na2(r, w)
 
 # Question 2
 
-Load the `wmata_ridership` data frame into R from 
-<https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each 
-month, calculate the proportion of rides made on a given day of the month. Then 
-make box plots of the proportion excluding days from 2004 and 2005
+Load the `wmata_ridership` data frame into R from <https://dcgerard.github.io/stat_412_612/data/wmata_ridership.csv>. For each month, calculate the proportion of rides made on a given day of the month. Then make box plots of the proportion excluding days from 2004 and 2005
 
 ```{r}
+#| output: false
 wmata <- read.csv("wmata_ridership.csv")
-wmata
 str(wmata)
 
 wmata <- wmata %>%
@@ -166,8 +164,9 @@ oct <- wmata[substr(wmata$Date, 6, 7) == "10", ]
 nov <- wmata[substr(wmata$Date, 6, 7) == "11", ]
 
 dec <- wmata[substr(wmata$Date, 6, 7) == "12", ]
+```
 
-
+```{r}
 
 ggplot(data = jan, mapping = aes(x = prop)) +
   geom_boxplot(col = "orchid", fill = "white") +
@@ -256,7 +255,6 @@ V <- c("Bears", "Lions", "Dolphins", "Eagles", "Bengals")
 V[c(1, 3, 5)]
 ```
 
-
 ## (3ii) Subsetting using a `for` loop
 
 ```{r}
@@ -271,13 +269,11 @@ for(i in animals) {
 empty
 ```
 
-
 ## (3iii)Returning all values in a single vector (one line of code)
 
 ```{r}
 V[c(1, 3, 5)]
 ```
-
 
 ### (a) Using positive indices
 
@@ -285,20 +281,17 @@ V[c(1, 3, 5)]
 V[c(1, 3, 5)]
 ```
 
-
 ### (b) Using negative indices
 
 ```{r}
 V[c(-2, -4)]
 ```
 
-
 ### (c) Using logical indexing
 
 ```{r}
 V[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
 ```
-
 
 ### (d) Attempting to subset by names
 
@@ -308,7 +301,6 @@ Vnames <- c(bears = "Bears", lions = "Lions", dolphins = "Dolphins",
 
 Vnames[c("bears", "dolphins", "bengals")]
 ```
-
 
 # Question 4:
 
@@ -334,13 +326,12 @@ records
     -   `name`\
     -   `hire_date`\
     -   `dept`
-    
+
 ```{r}
 records_cleaned <- str_split(records, "\\|", simplify = TRUE)
 records_cleaned <- setNames(as.data.frame(records_cleaned), c("name", "hire_date",
                                                               "dept"))
 ```
-
 
 2.  **Convert `hire_date` into a proper `Date` object**, correctly handling all of the different date formats.
 
@@ -350,17 +341,15 @@ library(parsedate)
 records_cleaned$hire_date <- parse_date(records_cleaned$hire_date)
 ```
 
-
 3.  **Convert `dept` into an ordered factor** with the levels:\
     `HR`, `FIN`, `IT`, `MKT`.
-    
+
 ```{r}
 records_cleaned <- records_cleaned %>%
   mutate(dept = str_trim(dept)) %>%
   mutate(dept = as.factor(dept)) %>%
   mutate(dept = fct_relevel(dept, "HR", "FIN", "IT", "MKT"))
 ```
-
 
 4.  **Construct a clean data frame** containing the parsed and converted variables.
 
@@ -369,7 +358,6 @@ records_cleaned <- records_cleaned %>%
 records_cleaned
 
 ```
-
 
 5.  **Add a new variable** called `years_worked` that reports the number of full years each employee has worked as of today.
 
@@ -398,5 +386,8 @@ records_cleaned <- records_cleaned %>%
 
 ```
 
-
 6.  **Return the final cleaned data frame.**
+
+```{r}
+records_cleaned
+```
